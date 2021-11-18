@@ -1,0 +1,62 @@
+#include <stdio.h>
+
+int leggiNumeroInteroPositivo (int x);
+int sommaDivisoriPropri (int a);
+int amici (int b,int sommaDivisori,int a);
+
+int main()
+  {
+    int x,a,sommaDivisori;
+    int secondo;
+    printf("Inserisci un numero positivo\n");
+    scanf("%d",&x);
+    a=leggiNumeroInteroPositivo (x);
+    sommaDivisori=sommaDivisoriPropri (a);
+    if(sommaDivisori==a)
+    printf("Il numero e' perfetto\n");
+    else{
+      printf("Il numero non e' perfetto\n");
+      printf("A questo punto inserisci un altro numero e ti diro se e' almeno amico di quello precedente\n");
+      scanf("%d",&secondo);
+      int amichevoli=amici(secondo,sommaDivisori,a);
+      if(amichevoli==1)
+      printf("I numeri sono amici\n");
+      if(amichevoli==0)
+      printf("I numeri non sono amici\n");
+
+    }
+  return 0;
+}
+
+int leggiNumeroInteroPositivo (int x)
+{
+  do{
+    if(x<0)
+    printf("Attenzione! Inserisci un numero positivo\n");
+  }while(x<0);
+  return x;
+}
+int sommaDivisoriPropri (int a){
+  int i,resto,somma=0;
+  for(i=1;i<a;i++)
+  {
+    resto=a%i;
+    if(resto==0)
+    somma+=i;
+  }
+  return somma;
+}
+int amici (int b,int sommaDivisori,int a){
+  int i,resto,somma=0;
+  for(i=1;i<b;i++)
+  {
+    resto=b%i;
+    if(resto==0)
+    somma+=i;
+  }
+  if(a==somma&&b==sommaDivisori)
+    return 1;
+      else{
+        return 0;
+      }
+}

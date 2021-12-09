@@ -1,0 +1,63 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include <time.h>
+struct nodo
+{
+    int elem;
+    struct nodo *next;
+};
+typedef struct nodo *lista;
+
+lista inserisci_lista(lista l,int el);
+void stampa(lista l);
+int mineven(lista l);
+
+int main() {
+    lista l;
+    int el;
+    srand(time(NULL));
+    for(int i=0;i<9;i++)
+    {
+        el=rand()%50;
+        l=inserisci_lista(l,el);
+    }
+    stampa(l);
+    printf("\nIl minimo elemento pari della lista e':%d",mineven(l));
+    return 0;
+}
+
+lista inserisci_lista(lista l,int el)
+{
+    struct nodo *tmp=malloc(sizeof(struct nodo));
+    tmp->elem=el;
+    tmp->next=l;
+    return tmp;
+}
+
+void stampa(lista l)
+{
+    while(l!=NULL)
+    {
+        printf("%d-->",l->elem);
+        l=l->next;
+    }
+    printf("NULL");
+}
+
+int mineven(lista l)
+{
+lista min = NULL ;
+while (l != NULL )
+{
+while ((l!=NULL)&&(l-> elem%2!=0)) 
+l=l->next ;
+if (min == NULL ) 
+    min =l;
+else if (( l != NULL )&&( l->elem < min->elem)) 
+    min = l;
+if (l!=NULL ) 
+    l=l -> next ;
+}
+return min->elem; ;
+}
